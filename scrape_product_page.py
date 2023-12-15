@@ -203,6 +203,10 @@ def scrape_product_data(url: str) -> Dict[str, str]:
 
         result = dict()
 
+        # Extracting Product ID
+        ProductID = url.split('/')[-1]
+        result.update({"ProductID": ProductID})
+
         # Name and Price
         try:
             div_element = soup.select_one("div.aMaAEs")
