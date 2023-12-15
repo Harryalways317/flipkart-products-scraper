@@ -114,7 +114,7 @@ def extract_product_details(div_element):
     return result
 
 
-def scrape_product_page(url: str) -> Dict[str, str]:
+def scrape_product_data(url: str) -> Dict[str, str]:
     # url = 'https://www.flipkart.com/p/p/p?pid=KPBGUKFQ9ZUG6XEG'
     # url = 'https://www.flipkart.com/p/p/p?pid=SUIGS9QB4FZ47YDM'
     try:
@@ -260,7 +260,7 @@ def scrape_product_page(url: str) -> Dict[str, str]:
         return False
 
 
-def main():
+def scrape_product_page():
     df = pd.read_csv(INPUT_FILE_PATH)
     #shuffle df rows
     # df = df.sample(frac=1).reset_index(drop=True)
@@ -268,7 +268,7 @@ def main():
 
     # Using ThreadPoolExecutor to create a pool of threads
     with ThreadPoolExecutor(max_workers=10) as executor:
-        future_to_url = {executor.submit(scrape_product_page, url): url for url in df['URL']}
+        future_to_url = {executor.submit(scrape_product_data, url): url for url in df['URL']}
         for future in concurrent.futures.as_completed(future_to_url):
             url = future_to_url[future]
             try:
@@ -286,4 +286,4 @@ def main():
     print(f"Scraped data saved to {OUTPUT_FILE_PATH}")
 
 if __name__ == "__main__":
-    main()
+    scrape_product_page()
