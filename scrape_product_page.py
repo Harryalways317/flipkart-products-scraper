@@ -112,7 +112,7 @@ def extract_product_details(div_element):
         result['Reviews Count'] = ''
     # Extracting Flipkart Assured
     try:
-        flipkart_assured_tag = div_element.select_one('div.jMnjzX')
+        flipkart_assured_tag = div_element.select_one('img.jMnjzX')
         result['Flipkart Assured'] = True if flipkart_assured_tag else False
     except Exception as e:
         print(f"Exception extracting Flipkart Assured: {e}")
@@ -269,8 +269,13 @@ def scrape_product_data(url: str) -> Dict[str, str]:
 
 def scrape_product_page():
     df = pd.read_csv(INPUT_FILE_PATH)
+
+    
     #shuffle df rows
     # df = df.sample(frac=1).reset_index(drop=True)
+
+    #keep only 10 rows
+    # df = df.head(10)
     scraped_data = []
 
     # Using ThreadPoolExecutor to create a pool of threads
