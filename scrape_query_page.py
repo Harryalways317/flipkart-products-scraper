@@ -8,6 +8,21 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
 import csv
+import os
+
+
+# Base Url and total pages to scrape, total pages would be around 25 to 30 based on product query, check this in website first, on how many pages are there
+
+# base_url = 'https://www.flipkart.com/q/womens-ethnic-wear'  
+# base_url = 'https://www.flipkart.com/q/ethnic-dress-for-women'
+# base_url = 'https://www.flipkart.com/womens-kurtas-kurtis/ethnic-dress~type/pr?sid=clo%2Ccfv%2Ccib%2Crkt'  
+# base_url = 'https://www.flipkart.com/q/ethnic-gowns'  
+# base_url = 'https://www.flipkart.com/womens-clothing/ethnic-wear/ethnic-sets/pr?sid=2oq%2Cc1r%2C3pj%2Cu62'  
+base_url = 'https://www.flipkart.com/womens-clothing/ethnic-wear/ethnic-sets/pr?sid=2oq%2Cc1r%2C3pj%2Cu62'  
+total_pages = 25
+os.makedirs('generated', exist_ok=True)
+file_name = 'generated/product_links.csv'
+
 
 def get_product_links(base_url, total_pages):
     product_links = []
@@ -80,15 +95,10 @@ def get_product_links(base_url, total_pages):
     print("Data has been written to product_links.csv")
     return product_links
 
-# Base Url and total pages to scrape, total pages would be around 25 to 30 based on product query, check this in website first, on how many pages are there
+def scrape_query_page():
+    product_links = get_product_links(base_url, total_pages)
+    print(f"Total Product Links Collected: {len(product_links)}")
+    
 
-# base_url = 'https://www.flipkart.com/q/womens-ethnic-wear'  
-# base_url = 'https://www.flipkart.com/q/ethnic-dress-for-women'
-# base_url = 'https://www.flipkart.com/womens-kurtas-kurtis/ethnic-dress~type/pr?sid=clo%2Ccfv%2Ccib%2Crkt'  
-# base_url = 'https://www.flipkart.com/q/ethnic-gowns'  
-# base_url = 'https://www.flipkart.com/womens-clothing/ethnic-wear/ethnic-sets/pr?sid=2oq%2Cc1r%2C3pj%2Cu62'  
-base_url = 'https://www.flipkart.com/womens-clothing/ethnic-wear/ethnic-sets/pr?sid=2oq%2Cc1r%2C3pj%2Cu62'  
-total_pages = 25
-
-product_links = get_product_links(base_url, total_pages)
-print(f"Total Product Links Collected: {len(product_links)}")
+if __name__ == "__main__":
+    scrape_query_page()
