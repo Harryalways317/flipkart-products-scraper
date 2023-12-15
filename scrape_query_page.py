@@ -21,7 +21,7 @@ import os
 base_url = 'https://www.flipkart.com/womens-clothing/ethnic-wear/ethnic-sets/pr?sid=2oq%2Cc1r%2C3pj%2Cu62'  
 total_pages = 25
 os.makedirs('generated', exist_ok=True)
-file_name = 'generated/product_links.csv'
+file_name = 'generated/fk_product_links.csv'
 
 
 def get_product_links(base_url, total_pages):
