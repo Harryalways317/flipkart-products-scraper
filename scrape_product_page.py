@@ -110,6 +110,13 @@ def extract_product_details(div_element):
         print(f"Exception extracting Ratings Count and Reviews Count: {e}")
         result['Ratings Count'] = ''
         result['Reviews Count'] = ''
+    # Extracting Flipkart Assured
+    try:
+        flipkart_assured_tag = div_element.select_one('div.jMnjzX')
+        result['Flipkart Assured'] = True if flipkart_assured_tag else False
+    except Exception as e:
+        print(f"Exception extracting Flipkart Assured: {e}")
+        result['Flipkart Assured'] = ''
 
     return result
 
